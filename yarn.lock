@@ -1243,6 +1243,15 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-router-config@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react-router-config/-/react-router-config-5.0.0.tgz#901110a781b5ca0e56886d18686196638cde75f0"
+  integrity sha512-DJl5ONVsmcP0rts5n3I6nQcYt2f0pLgP/NyZqzdYcVqRT/X9lDzYg8LlvkPznULK+iDAH4/3rnFYz6ibY9J/SA==
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
+    "@types/react-router" "*"
+
 "@types/react-router-dom@^4.3.4":
   version "4.3.4"
   resolved "http://npm.tuniu.org/@types/react-router-dom/download/@types/react-router-dom-4.3.4.tgz#63a7a8558129d2f4ff76e4bdd099bf4b98e25a0d"
@@ -8797,6 +8806,13 @@ react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "http://npm.tuniu.org/react-lifecycles-compat/download/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha1-TxonOv38jzSIqMUWv9p4+HI1I2I=
+
+react-router-config@^5.0.1:
+  version "5.0.1"
+  resolved "http://npm.tuniu.org/react-router-config/download/react-router-config-5.0.1.tgz#e6663010f42aa5e39c2f21412d8f958f6866e48a"
+  integrity sha1-5mYwEPQqpeOcLyFBLY+Vj2hm5Io=
+  dependencies:
+    "@babel/runtime" "^7.1.2"
 
 react-router-dom@^5.0.1:
   version "5.0.1"
