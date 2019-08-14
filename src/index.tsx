@@ -1,16 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { renderRoutes } from "react-router-config";
 import './index.css';
+import React from 'react';
 import routes from './router'
-import * as serviceWorker from './serviceWorker';
+import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import todoApp from './store/redurces';
 import { BrowserRouter } from "react-router-dom";
+import * as serviceWorker from './serviceWorker';
+import { renderRoutes } from "react-router-config";
+
+let store = createStore(todoApp)
 
 ReactDOM.render(
-  <BrowserRouter>
-    {/* kick it all off with the root route */}
-    {renderRoutes(routes)}
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      {/* kick it all off with the root route */}
+      {renderRoutes(routes)}
+    </BrowserRouter>
+  </Provider>,
   document.getElementById("root")
 );
 
