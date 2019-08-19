@@ -1,15 +1,12 @@
-const testRed = (state: any, actions: any) => {
-  switch (actions.type) {
-    case 'ADD_ONE':
-      return {
-        ...state, 
-        num: actions.num
-      }
-  
-    default:
-      return {
-        ...state
-      }
+const testRed = (state: any, {num}: any) => {
+  if (num === undefined) {
+    num = 0
+  } else {
+    num ++
+  }
+  return {
+    ...state,
+    num
   }
 }
 

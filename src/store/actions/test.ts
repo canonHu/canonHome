@@ -1,5 +1,7 @@
 
-export const testRedurce = (num: Number) => ({
-  type: 'ADD_ONE',
-  num
-})
+export const testRedurce = (num: Number|undefined) => {
+  return {
+    type: 'ADD_ONE',
+    num
+  }
+}
