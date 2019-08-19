@@ -9,7 +9,11 @@ import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
 import { renderRoutes } from "react-router-config";
 
-let store = createStore(todoApp)
+let store = createStore(
+  todoApp,
+  (window as any).__REDUX_DEVTOOLS_EXTENSION__
+  && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 ReactDOM.render(
   <Provider store={store}>
