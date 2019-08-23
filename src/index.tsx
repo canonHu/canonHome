@@ -1,4 +1,4 @@
-import './index.css';
+import './index.less';
 import React from 'react';
 import routes from './router'
 import ReactDOM from 'react-dom';
