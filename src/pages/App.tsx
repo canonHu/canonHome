@@ -3,7 +3,7 @@ import React from 'react'
 // import Test from '../store/containers/Test'
 import Home from './Home'
 import Lover from './Love'
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Switch } from 'antd';
 
 const { Header, Footer, Sider } = Layout;
 
@@ -12,7 +12,8 @@ interface IProps {
   size?: string
 }
 interface IState {
-  key: number // 展示模块key
+  key: number, // 展示模块key
+  theme: 'dark'|'light'|undefined // 切换主题
 }
 
 
@@ -20,9 +21,16 @@ class App extends React.Component<IProps, IState> {
   constructor (props:any) {
     super (props);
     this.state = {
-      key: 1
+      key: 1,
+      theme: 'dark'
     };
   }
+
+  changeTheme = (value: boolean) => {
+    this.setState({
+      theme: value ? 'light' : 'dark',
+    });
+  };
 
   toFail = (e: any) => {
 
@@ -49,7 +57,8 @@ class App extends React.Component<IProps, IState> {
             }}
           >
             <div className="logo" />
-            <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+            <Switch onChange={this.changeTheme} /> Change Theme
+            <Menu theme={this.state.theme} mode="inline" defaultSelectedKeys={['1']}>
               <Menu.Item key="1" onClick={this.toFail}>
                 <Icon type="user" />
                 <span className="nav-text">nav 1</span>
