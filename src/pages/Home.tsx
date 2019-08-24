@@ -40,19 +40,19 @@ const Home = () => (
       pageSize: 3,
     }}
     dataSource={listData}
-    footer={
-      <div>
-        <b>ant design</b> footer part
-      </div>
-    }
+    // footer={
+    //   <div>
+    //     <b>ant design</b> footer part
+    //   </div>
+    // }
     renderItem={(item, index) => (
       <List.Item
         key={index}
-        actions={[
-          <IconText type="star-o" text="156" key="list-vertical-star-o" />,
-          <IconText type="like-o" text="156" key="list-vertical-like-o" />,
-          <IconText type="message" text="2" key="list-vertical-message" />,
-        ]}
+        // actions={[
+        //   <IconText type="star-o" text="156" key="list-vertical-star-o" />,
+        //   <IconText type="like-o" text="156" key="list-vertical-like-o" />,
+        //   <IconText type="message" text="2" key="list-vertical-message" />,
+        // ]}
         extra={
           <img
             width={272}

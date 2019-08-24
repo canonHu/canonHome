@@ -7,12 +7,12 @@ const routes = [
     component: Root,
     routes: [
       {
-        path: "/",
+        path: '/',
         exact: true,
         component: App
       },
       {
-        path: "/404",
+        path: '*',
         exact: true,
         component: Fail
       },
