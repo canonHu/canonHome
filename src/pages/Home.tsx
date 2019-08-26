@@ -1,6 +1,5 @@
 import React from 'react';
-import { Layout, List, Avatar, Icon } from 'antd';
-const { Content } = Layout;
+import { List, Avatar, /* Icon */ } from 'antd';
 
 const listData:Array<{
   href: string,
@@ -21,12 +20,12 @@ for (let i = 0; i < 23; i++) {
   });
 }
 
-const IconText = ({ type, text }: any) => (
-  <span>
-    <Icon type={type} style={{ marginRight: 8 }} />
-    {text}
-  </span>
-);
+// const IconText = ({ type, text }: any) => (
+//   <span>
+//     <Icon type={type} style={{ marginRight: 8 }} />
+//     {text}
+//   </span>
+// );
 
 
 const Home = () => (

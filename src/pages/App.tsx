@@ -3,7 +3,8 @@ import React from 'react'
 // import Test from '../store/containers/Test'
 import Home from './Home'
 import Lover from './Love'
-import { Layout, Menu, Icon, Switch } from 'antd';
+import Edit from './edit'
+import { Layout, Menu, Icon } from 'antd';
 
 const { Header, Footer, Sider } = Layout;
 
@@ -52,6 +53,10 @@ class App extends React.Component<IProps, IState> {
         {
           type: 'shop',
           text: '数据统计'
+        },
+        {
+          type: 'edit',
+          text: '添加笔记'
         }
       ],
       headTitle: '平时杂记'
@@ -116,6 +121,9 @@ class App extends React.Component<IProps, IState> {
               }
               {
                 this.state.key === 1 && <Lover></Lover>
+              }
+              {
+                this.state.key === 6 && <Edit></Edit>
               }
             </div>
             <Footer style={{ textAlign: 'center' }}>A Place To Updata ©2019 Created by Jianeng Hu</Footer>
