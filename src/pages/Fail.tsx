@@ -1,11 +1,9 @@
 import React from 'react'
 
-function Fail() {
-  return (
-      <div>
-        <h2>404</h2>
-      </div>
-  );
-}
+const Fail = () => (
+  <div>
+    <h2>这是一个错误页面</h2>
+  </div>
+)
 
 export default Fail;

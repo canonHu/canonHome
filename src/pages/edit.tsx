@@ -33,20 +33,20 @@ class Edit extends React.Component<IProps, IState> {
     })
   }
 
-  handleChange = (editorState:any) => {
+  public handleChange = (editorState:any) => {
     this.setState({
       editorState: editorState,
       outputHTML: editorState.toHTML()
     })
   }
 
-  setEditorContentAsync = () => {
+  public setEditorContentAsync = () => {
     this.state.isLivinig && this.setState({
       editorState: BraftEditor.createEditorState('<p>你好，<b>世界!</b><p>')
     })
   }
 
-  render () {
+  public render () {
 
     const { editorState, outputHTML } = this.state
 

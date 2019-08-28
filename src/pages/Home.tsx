@@ -10,7 +10,7 @@ const listData:Array<{
 }> = [];
 for (let i = 0; i < 23; i++) {
   listData.push({
-    href: 'http://ant.design',
+    href: './detail',
     title: `ant design part ${i}`,
     avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
     description:

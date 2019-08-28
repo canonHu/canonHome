@@ -1,6 +1,7 @@
 import App from './pages/App'
 import Fail from './pages/Fail'
 import Root from './pages/Root'
+import Detail from './pages/Detail'
 
 const routes = [
   {
@@ -12,10 +13,15 @@ const routes = [
         component: App
       },
       {
+        path: '/detail',
+        exact: true,
+        component: Detail
+      },
+      {
         path: '*',
         exact: true,
         component: Fail
-      },
+      }
       // {
       //   path: "/child/:id",
       //   component: Child,
