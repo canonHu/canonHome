@@ -1,6 +1,14 @@
 import React from 'react';
 import { List, Avatar, /* Icon */ } from 'antd';
 
+fetch('https://www.canonhu.top/findData')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    console.log(111, myJson);
+  });
+
 const listData:Array<{
   href: string,
   title: string,
