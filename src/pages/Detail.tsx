@@ -33,6 +33,8 @@ export default class Detail extends React.Component<IProps, IState> {
 
   public buildPreviewHtml () {
 
+    // return `${this.state.html}`
+
     return `
       <!Doctype html>
       <html>
