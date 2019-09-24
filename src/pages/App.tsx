@@ -1,7 +1,8 @@
 import '../style/App.less';
 import React from 'react'
 // import Test from '../store/containers/Test'
-import Home from './Home'
+import Home from '../store/containers/Home'
+// import Home from './Home'
 import Lover from './Love'
 import Edit from './edit'
 import { Layout, Menu, Icon } from 'antd';

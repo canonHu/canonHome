@@ -17,6 +17,12 @@ export default class Detail extends React.Component<IProps, IState> {
     editorState: BraftEditor.createEditorState('')
   }
 
+  componentWillMount () {
+    this.setState({
+      html: window.localStorage.getItem('DETAIL')
+    })
+  }
+
   public handleChange = (editorState: any) => {
     this.setState({ editorState })
   }
