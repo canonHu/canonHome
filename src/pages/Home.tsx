@@ -10,19 +10,34 @@ import { List, Avatar, /* Icon */ } from 'antd';
 //     console.log(111, myJson);
 //   });
 
-// fetch('https://www.canonhu.top/save', {
+fetch('http://www.canonhu.top/save?a=789', {
+  method: 'POST', // or 'PUT'
+  body: JSON.stringify({
+    name: 'hujianeng',
+    html: '<p>123</p>'
+  }), // data can be `string` or {object}!
+  headers: new Headers({
+    'Content-Type': 'application/json'
+  })
+}).then(res => res.json())
+.catch(error => console.error('Error:', error))
+.then(response => console.log('Success:', response));
+
+// fetch(, {
 //   body: JSON.stringify({
 //     name: 'hujianeng',
 //     html: '<p>123</p>'
 //   }), // must match 'Content-Type' header
 //   cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-//   credentials: 'same-origin', // include, same-origin, *omit
+//   credentials: 'include', // include, same-origin, *omit
 //   headers: {
 //     'user-agent': 'Mozilla/4.0 MDN Example',
-//     'content-type': 'application/json'
+//     'content-type': 'application/json',
+//     'sec-fetch-mode': 'cors'
 //   },
 //   method: 'POST', // *GET, POST, PUT, DELETE, etc.
 //   mode: 'cors', // no-cors, cors, *same-origin
+//   // secFetchMode: 'cors',
 //   redirect: 'follow', // manual, *follow, error
 //   referrer: 'no-referrer', // *client, no-referrer
 // })
