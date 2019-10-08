@@ -1,51 +1,7 @@
 import React from 'react';
-import { List, Avatar, /* Icon */ } from 'antd';
+import { List, Avatar, Icon, Spin } from 'antd';
 
-// fetch('https://www.canonhu.top/list')
-//   .then(function(response) {
-//     console.log(123, response)
-//     return response.json();
-//   })
-//   .then(function(myJson) {
-//     console.log(111, myJson);
-//   });
-
-fetch('http://www.canonhu.top/save?a=789', {
-  method: 'POST', // or 'PUT'
-  body: JSON.stringify({
-    name: 'hujianeng',
-    html: '<p>123</p>'
-  }), // data can be `string` or {object}!
-  headers: new Headers({
-    'Content-Type': 'application/json'
-  })
-}).then(res => res.json())
-.catch(error => console.error('Error:', error))
-.then(response => console.log('Success:', response));
-
-// fetch(, {
-//   body: JSON.stringify({
-//     name: 'hujianeng',
-//     html: '<p>123</p>'
-//   }), // must match 'Content-Type' header
-//   cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-//   credentials: 'include', // include, same-origin, *omit
-//   headers: {
-//     'user-agent': 'Mozilla/4.0 MDN Example',
-//     'content-type': 'application/json',
-//     'sec-fetch-mode': 'cors'
-//   },
-//   method: 'POST', // *GET, POST, PUT, DELETE, etc.
-//   mode: 'cors', // no-cors, cors, *same-origin
-//   // secFetchMode: 'cors',
-//   redirect: 'follow', // manual, *follow, error
-//   referrer: 'no-referrer', // *client, no-referrer
-// })
-// .then(response => response.json())
-// .then(res => {
-//   console.log(1113, res);
-// })
-
+const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
 // const IconText = ({ type, text }: any) => (
 //   <span>
@@ -74,6 +30,7 @@ interface IProps {
 }
 
 interface IState {
+  load: Boolean,
   listData: Array<{
     href: string,
     title: string,
@@ -88,6 +45,7 @@ class Home extends React.Component<IProps, IState> {
   constructor (props:any) {
     super (props);
     this.state = {
+      load: false,
       listData: [
         {
           href: '',
@@ -101,7 +59,10 @@ class Home extends React.Component<IProps, IState> {
     }
   }
 
-  componentWillMount () {
+  public componentWillMount () {
+    this.setState({
+      load: true
+    })
     fetch('https://www.canonhu.top/list')
       .then(function(response) {
         return response.json();
@@ -113,69 +74,72 @@ class Home extends React.Component<IProps, IState> {
           arr.push({
             href: './detail',
             title: i.title,
-            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+            avatar: 'https://m4.tuniucdn.com/fb2/t1/G5/M00/C7/FE/Cii-tF2cUlaIaHfhAASpxa1h1fQAAbcpwGgausABKnd02.jpeg',
             description: i.author,
             content: i.describe,
             html: i.html
           });
         })
         this.setState({
+          load: false,
           listData: arr
         })
       });
   }
 
-  clickToDetail (url: string, content: string) {
+  public clickToDetail (url: string, content: string) {
     window.localStorage.setItem('DETAIL', content)
     window.open(url)
     // detailData()
     // window.location.href = url
   }
 
-  render () {
+  public render () {
     return (
-      <List
-        itemLayout="vertical"
-        size="large"
-        pagination={{
-          onChange: page => {
-            console.log(page);
-          },
-          pageSize: 3,
-        }}
-        dataSource={this.state.listData}
-        // footer={
-        //   <div>
-        //     <b>ant design</b> footer part
-        //   </div>
-        // }
-        renderItem={(item, index) => (
-          <List.Item
-            key={index}
-            // actions={[
-            //   <IconText type="star-o" text="156" key="list-vertical-star-o" />,
-            //   <IconText type="like-o" text="156" key="list-vertical-like-o" />,
-            //   <IconText type="message" text="2" key="list-vertical-message" />,
-            // ]}
-            extra={
-              <img
-                width={272}
-                alt="logo"
-                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+      <Spin spinning={this.state.load ? true : false} indicator={antIcon}>
+        <List
+          itemLayout="vertical"
+          size="large"
+          pagination={{
+            onChange: page => {
+              console.log(page);
+            },
+            pageSize: 6,
+          }}
+          dataSource={this.state.listData}
+          // footer={
+          //   <div>
+          //     <b>ant design</b> footer part
+          //   </div>
+          // }
+          renderItem={(item, index) => (
+            <List.Item
+              key={index}
+              // actions={[
+              //   <IconText type="star-o" text="156" key="list-vertical-star-o" />,
+              //   <IconText type="like-o" text="156" key="list-vertical-like-o" />,
+              //   <IconText type="message" text="2" key="list-vertical-message" />,
+              // ]}
+              extra={
+                <img
+                  width={272}
+                  alt="logo"
+                  src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                />
+              }
+            >
+              <List.Item.Meta
+                avatar={<Avatar src={item.avatar} />}
+                title={<p onClick={() => {
+                  this.clickToDetail(item.href, item.html)
+                }}>{item.title}</p>}
+                description={item.description}
               />
-            }
-          >
-            <List.Item.Meta
-              avatar={<Avatar src={item.avatar} />}
-              title={<p onClick={() => {
-                this.clickToDetail(item.href, item.html)
-              }}>{item.title}</p>}
-              description={item.description}
-            />
-            {item.content}
-          </List.Item>
-        )}
-      />
+              {item.content}
+            </List.Item>
+          )}
+        />
+      </Spin>
     )
   }
 }

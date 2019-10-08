@@ -4,7 +4,7 @@ import React from 'react'
 import Home from '../store/containers/Home'
 // import Home from './Home'
 import Lover from './Love'
-import Edit from './edit'
+import Edit from './Edit'
 import { Layout, Menu, Icon } from 'antd';
 
 const { Header, Footer, Sider } = Layout;
