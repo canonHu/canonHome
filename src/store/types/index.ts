@@ -11,3 +11,7 @@ export const SHOW_ACTIVE = 'SHOW_ACTIVE';
 export const SHOW_COMPLETED = 'SHOW_COMPLETED';
 
 export const HOME_LIST = 'HOME_LIST'
+
+export const ADD_ID = 'ADD_ID'
+
+export const CHANGE_TYPE = 'CHANGE_TYPE'

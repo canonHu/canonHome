@@ -1,23 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import request from '../utils/request'
 import { List, Avatar, Icon, Spin } from 'antd';
-
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
-// const IconText = ({ type, text }: any) => (
+// const IconText = ({ type, text, id }: any) => (
 //   <span>
-//     <Icon type={type} style={{ marginRight: 8 }} />
+//     <Icon onClick={this.delete(id)} type={type} style={{ marginRight: 8 }} />
 //     {text}
 //   </span>
 // );
 
 
-const listDatas:Array<{
-  href: string,
-  title: string,
-  avatar: string,
-  description: string,
-  content: string
-}> = []
+// const listDatas:Array<{
+//   href: string,
+//   title: string,
+//   avatar: string,
+//   description: string,
+//   content: string
+// }> = []
 
 interface IProps {
   listData: Array<{
@@ -26,7 +27,9 @@ interface IProps {
     avatar: string,
     description: string,
     content: string
-  }>
+  }>,
+  changeId: any,
+  keyName: number
 }
 
 interface IState {
@@ -38,7 +41,18 @@ interface IState {
     description: string,
     content: string,
     html: string
-  }>
+  }>,
+  listDatas: Array<{
+    href: string,
+    title: string,
+    avatar: string,
+    description: string,
+    content: string,
+    html: string,
+    id: number,
+    type: number,
+  }>,
+  keyName: number
 }
 
 class Home extends React.Component<IProps, IState> {
@@ -55,43 +69,75 @@ class Home extends React.Component<IProps, IState> {
           content: '',
           html: ''
         }
-      ]
+      ],
+      listDatas: [
+        {
+          href: '',
+          title: '',
+          avatar: '',
+          description: '',
+          content: '',
+          html: '',
+          id: 0,
+          type: 0
+        }
+      ],
+      keyName: 0
     }
   }
 
   public componentWillMount () {
     this.setState({
-      load: true
+      load: true,
+      keyName: this.props.keyName
     })
-    fetch('https://www.canonhu.top/list')
-      .then(function(response) {
-        return response.json();
-      })
-      .then((myJson) => {
-        console.log(111, myJson);
-        const arr:any = []
-        myJson.map((i:any) => {
-          arr.push({
-            href: './detail',
-            title: i.title,
-            avatar: 'https://m4.tuniucdn.com/fb2/t1/G5/M00/C7/FE/Cii-tF2cUlaIaHfhAASpxa1h1fQAAbcpwGgausABKnd02.jpeg',
-            description: i.author,
-            content: i.describe,
-            html: i.html
-          });
+    request('list', '', 'GET', 'fetch')
+      .then((myJson: any) => {
+        this.setState({
+          listDatas: myJson.map((i:any) => {
+            return {
+              href: './detail',
+              title: i.title,
+              avatar: 'https://m4.tuniucdn.com/fb2/t1/G5/M00/C7/FE/Cii-tF2cUlaIaHfhAASpxa1h1fQAAbcpwGgausABKnd02.jpeg',
+              description: i.author,
+              content: i.describe,
+              html: i.html,
+              id: i.id,
+              type: i.type
+            };
+          })
         })
+
+        this.props.changeId(this.state.listDatas.length)
         this.setState({
           load: false,
-          listData: arr
+          listData: this.state.listDatas.filter(i => {
+            return i.type === this.state.keyName
+          })
         })
-      });
+      })
+  }
+
+  public componentWillUpdate(nextProps: any, nextState: any) {
+    // nextState.listData = 
+    // nextState({
+    //   listData: this.state.listDatas.filter(i => {
+    //     return i.type === nextProps.keyName
+    //   })
+    // })
+    console.log(123, nextProps, nextState)
   }
 
   public clickToDetail (url: string, content: string) {
     window.localStorage.setItem('DETAIL', content)
     window.open(url)
-    // detailData()
-    // window.location.href = url
+  }
+
+  /**
+   * delete 删除
+   */
+  public delete(id: number) {
+    id !== undefined && request('delete', {id}, 'get', 'fetch')
   }
 
   public render () {
@@ -112,19 +158,20 @@ class Home extends React.Component<IProps, IState> {
           //     <b>ant design</b> footer part
           //   </div>
           // }
-          renderItem={(item, index) => (
+          renderItem={(item: any, index) => (
             <List.Item
               key={index}
-              // actions={[
-              //   <IconText type="star-o" text="156" key="list-vertical-star-o" />,
-              //   <IconText type="like-o" text="156" key="list-vertical-like-o" />,
-              //   <IconText type="message" text="2" key="list-vertical-message" />,
-              // ]}
+              actions={[
+                <Icon onClick={() => {this.delete(item.id)}} type="delete" style={{ marginRight: 8 }} />
+                // <IconText id={item.id} type="delete" text="" key="list-vertical-delete" />,
+                // <IconText type="like-o" text="156" key="list-vertical-like-o" />,
+                // <IconText type="message" text="2" key="list-vertical-message" />,
+              ]}
               extra={
                 <img
                   width={272}
                   alt="logo"
-                  src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                  src="https://m4.tuniucdn.com/fb2/t1/G5/M00/C7/FE/Cii-tF2cUlaIaHfhAASpxa1h1fQAAbcpwGgausABKnd02.jpeg"
                 />
               }
             >
@@ -144,4 +191,19 @@ class Home extends React.Component<IProps, IState> {
   }
 }
 
-export default Home;
+const mapStateToProps = (data: any) => {
+  return{
+    id: data.home.id
+  }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    changeId : (id: number) => dispatch({
+      type : 'ADD_ID',
+      id
+    })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -1,10 +1,10 @@
 import {
-  CHANGE_TYPE
+  ADD_ID
 } from '../types'
 
-const homeData = (state: any, actions: any) => {
-  switch (actions.id) {
-    case CHANGE_TYPE:
+const editData = (state: any, actions: any) => {
+  switch (actions.type) {
+    case ADD_ID:
       
       return {
         ...state,
@@ -19,4 +19,4 @@ const homeData = (state: any, actions: any) => {
   }
 }
 
-export default homeData
+export default editData

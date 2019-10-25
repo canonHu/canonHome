@@ -1,11 +1,15 @@
 import 'braft-editor/dist/index.css'
 import React from 'react'
 import BraftEditor from 'braft-editor'
-import { Button, Input, Spin, Icon, message } from 'antd';
+import request from '../utils/request'
+import { connect } from 'react-redux'
+import { Button, Input, Spin, Icon, message, Radio } from 'antd';
 
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
 interface IProps {
+  id: number,
+  destroyTodo: any
 }
 
 interface IState {
@@ -14,7 +18,13 @@ interface IState {
   isLivinig: boolean,
   title: String,
   describe: String,
-  load: Boolean
+  load: Boolean,
+  id: number,
+  type: number,
+  list: Array<{
+    type: string,
+    name: string
+  }>
 }
 
 class Edit extends React.Component<IProps, IState> {
@@ -25,10 +35,39 @@ class Edit extends React.Component<IProps, IState> {
     isLivinig: true,
     title: '',
     describe: '',
-    load: false
+    load: false,
+    id: this.props.id,
+    type: 0,
+    list: [
+      {
+        type: '0',
+        name: '平时杂记'
+      },
+      {
+        type: '1',
+        name: 'LeetCode练习题'
+      },
+      {
+        type: '2',
+        name: '数据结构'
+      },
+      {
+        type: '3',
+        name: '小程序'
+      },
+      {
+        type: '4',
+        name: 'Threejs'
+      },
+      {
+        type: '5',
+        name: '数据统计'
+      },
+    ]
   }
 
   componentDidMount () {
+    // request('delete', '', 'get', 'fetch')
     this.setState({
       isLivinig: true
     })
@@ -59,33 +98,21 @@ class Edit extends React.Component<IProps, IState> {
     this.setState({
       load: true
     })
-    fetch('https://www.canonhu.top/save', {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      body: JSON.stringify({
-        title: this.state.title,
-        describe: this.state.describe,
-        author: 'hujianeng',
-        html: this.state.outputHTML
-      }), // must match 'Content-Type' header
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      // credentials: 'include', // include, same-origin, *omit
-      headers: {
-        'user-agent': 'Mozilla/4.0 MDN Example',
-        'content-type': 'application/json',
-        // 'sec-fetch-mode': 'cors'
-      },
-      mode: 'cors', // no-cors, cors, *same-origin
-      redirect: 'follow', // manual, *follow, error
-      referrer: 'no-referrer', // *client, no-referrer
-    })
-    .then(response => response.json())
-    .then(res => {
-      this.setState({
-        load: false
+    request('save', {
+      id: this.state.id,
+      author: 'hujianeng',
+      type: this.state.type,
+      title: this.state.title,
+      describe: this.state.describe,
+      html: this.state.outputHTML
+    }, 'POST', 'fetch')
+      .then(res => {
+        this.props.destroyTodo(this.state.id + 1)
+        this.setState({
+          load: false
+        })
+        message.success('This is a success message');
       })
-      message.success('This is a success message');
-      console.log(1113, res);
-    })
   }
 
   public upDataFun = (e:any) => {
@@ -105,12 +132,30 @@ class Edit extends React.Component<IProps, IState> {
     
   }
 
-  public render () {
+  /**
+   * @description 选择type
+   * 
+   */
 
-    const { editorState, outputHTML } = this.state
+  public change:any = (e: any) => {
+    this.state.type = parseInt(e.target.value, 10)
+  }
+
+  public render () {
+    const { editorState, /* outputHTML */ } = this.state
 
     return (
       <div>
+        <div>
+          <Radio.Group defaultValue="0" onChange={this.change} buttonStyle="solid">
+            {this.state.list.map(i => {
+              return <Radio.Button
+                key={i.type}
+                value={i.type}
+              >{i.name}</Radio.Button>
+            })}
+          </Radio.Group>
+        </div>
         <Spin spinning={this.state.load} indicator={antIcon}>
           <Input
             id="title"
@@ -139,4 +184,19 @@ class Edit extends React.Component<IProps, IState> {
 
 }
 
-export default Edit
+const mapStateToProps = (data: any) => {
+  return{
+    id: data.edit.id
+  }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    destroyTodo : (id: number) => dispatch({
+      type : 'ADD_ID',
+      id
+    })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Edit)

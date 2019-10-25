@@ -3,6 +3,7 @@ import React from 'react'
 // import Test from '../store/containers/Test'
 import Home from '../store/containers/Home'
 // import Home from './Home'
+import { connect } from 'react-redux'
 import Lover from './Love'
 import Edit from './Edit'
 import { Layout, Menu, Icon } from 'antd';
@@ -118,10 +119,7 @@ class App extends React.Component<IProps, IState> {
             <Header className="header">{this.state.headTitle}</Header>
             <div style={{ padding: '10px 20px' }}>
               {
-                this.state.key === 0 && <Home></Home>
-              }
-              {
-                this.state.key === 1 && <Lover></Lover>
+                this.state.key !== 6 && <Home keyName={this.state.key}></Home>
               }
               {
                 this.state.key === 6 && <Edit></Edit>
@@ -134,5 +132,20 @@ class App extends React.Component<IProps, IState> {
     )
   }
 }
+
+const mapStateToProps = (data: any) => {
+  return{
+    type: data.home.type
+  }
+}
+
+// const mapDispatchToProps = (dispatch: any) => {
+//   return {
+//     destroyTodo : (typei: number) => dispatch({
+//       type : 'CHANGE_TYPE',
+//       typei
+//     })
+//   }
+// }
 
 export default App
