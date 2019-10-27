@@ -1,12 +1,9 @@
-import '../style/App.less';
 import React from 'react'
-// import Test from '../store/containers/Test'
-import Home from '../store/containers/Home'
-// import Home from './Home'
-import { connect } from 'react-redux'
-import Lover from './Love'
 import Edit from './Edit'
+import Lover from './Love'
+import '../style/App.less';
 import { Layout, Menu, Icon } from 'antd';
+import Home from '../store/containers/Home'
 
 const { Header, Footer, Sider } = Layout;
 

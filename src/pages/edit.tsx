@@ -1,8 +1,8 @@
-import 'braft-editor/dist/index.css'
 import React from 'react'
+import 'braft-editor/dist/index.css'
+import { connect } from 'react-redux'
 import BraftEditor from 'braft-editor'
 import request from '../utils/request'
-import { connect } from 'react-redux'
 import { Button, Input, Spin, Icon, message, Radio } from 'antd';
 
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
