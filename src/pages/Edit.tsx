@@ -72,7 +72,7 @@ class Edit extends React.Component<IProps, IState> {
       isLivinig: true
     })
     // 3秒后更改编辑器内容
-    setTimeout(this.setEditorContentAsync, 3000)
+    // setTimeout(this.setEditorContentAsync, 3000)
   }
 
   componentWillUnmount () {
@@ -88,11 +88,11 @@ class Edit extends React.Component<IProps, IState> {
     })
   }
 
-  public setEditorContentAsync = () => {
-    this.state.isLivinig && this.setState({
-      editorState: BraftEditor.createEditorState('<p>你好，<b>世界!</b><p>')
-    })
-  }
+  // public setEditorContentAsync = () => {
+  //   this.state.isLivinig && this.setState({
+  //     editorState: BraftEditor.createEditorState('<p>你好，<b>世界!</b><p>')
+  //   })
+  // }
 
   public upData = () => {
     this.setState({
@@ -111,7 +111,7 @@ class Edit extends React.Component<IProps, IState> {
         this.setState({
           load: false
         })
-        message.success('This is a success message');
+        message.success('保存成功');
       })
   }
 

@@ -15,3 +15,5 @@ export const HOME_LIST = 'HOME_LIST'
 export const ADD_ID = 'ADD_ID'
 
 export const CHANGE_TYPE = 'CHANGE_TYPE'
+
+export const TRANSMIT = 'TRANSMIT'

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import request from '../utils/request'
-import { List, Avatar, Icon, Spin } from 'antd';
+import { List, Avatar, Icon, Spin, message } from 'antd';
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
 interface IProps {
@@ -131,6 +131,16 @@ class Home extends React.Component<IProps, IState> {
    */
   public delete(id: number) {
     id !== undefined && request('delete', {id}, 'get', 'fetch')
+    .then(res => {
+      if (res.success) {
+        this.setState({
+          listData: this.state.listDatas.filter(i => {
+            return i.id !== id
+          })
+        })
+        message.success('删除成功');
+      }
+    })
   }
 
   public render () {

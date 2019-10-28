@@ -1,5 +1,6 @@
 import {
-  ADD_ID
+  ADD_ID,
+  TRANSMIT
 } from '../types'
 
 const editData = (state: any, actions: any) => {
@@ -10,10 +11,18 @@ const editData = (state: any, actions: any) => {
         ...state,
         id: actions.id
       }
+
+    case TRANSMIT:
+
+      return {
+        ...state,
+        editorState: actions.editorState
+      }
   
     default:
       return {
         ...state,
+        editorState: null,
         id: 0
       }
   }
