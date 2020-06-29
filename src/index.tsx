@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import todoApp from './store/redurces';
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
 import { renderRoutes } from "react-router-config";
 
@@ -17,10 +17,10 @@ let store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <HashRouter>
       {/* kick it all off with the root route */}
       {renderRoutes(routes)}
-    </BrowserRouter>
+    </HashRouter>
   </Provider>,
   document.getElementById("root")
 );

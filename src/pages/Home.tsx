@@ -76,10 +76,11 @@ class Home extends React.Component<IProps, IState> {
     })
     request('list', '', 'GET', 'fetch')
       .then((myJson: any) => {
+        if (!myJson.length) return; 
         this.setState({
           listDatas: myJson.map((i:any) => {
             return {
-              href: './detail',
+              href: './#/detail',
               title: i.title,
               avatar: 'https://m4.tuniucdn.com/fb2/t1/G5/M00/C7/FE/Cii-tF2cUlaIaHfhAASpxa1h1fQAAbcpwGgausABKnd02.jpeg',
               description: i.author,
@@ -130,7 +131,7 @@ class Home extends React.Component<IProps, IState> {
    * delete 删除
    */
   public delete(id: number) {
-    id !== undefined && request('delete', {id}, 'get', 'fetch')
+    id !== undefined && request('deleteData', {id}, 'get', 'fetch')
     .then(res => {
       if (res.success) {
         this.setState({

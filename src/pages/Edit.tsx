@@ -138,7 +138,9 @@ class Edit extends React.Component<IProps, IState> {
    */
 
   public change:any = (e: any) => {
-    this.state.type = parseInt(e.target.value, 10)
+    this.setState({
+      type: parseInt(e.target.value, 10)
+    })
   }
 
   public render () {
