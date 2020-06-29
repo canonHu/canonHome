@@ -109,7 +109,7 @@ class FirstPage extends React.Component<IProps, IState> {
               }
             </Menu>
           </Sider>
-          <Layout style={{ marginLeft: 200 }}>
+          <Layout style={{ marginLeft: 200, paddingTop: 64 }}>
             <Header className="header">{this.state.headTitle}</Header>
             <div style={{ padding: '10px 20px' }}>
               {
